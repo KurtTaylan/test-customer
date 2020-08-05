@@ -23,9 +23,10 @@
 
 ### Test
 
+Unit Test Line Coverage: %74
 ```
-    Unit Test        :  mvn test
-    Integration Test :  mvn verify
+    Unit Test                :  mvn test
+    Unit + Integration Tests :  mvn verify
 ```
 
 ### Run
@@ -42,7 +43,6 @@ Used Libraries and Frameworks:
 - Lombok: 1.18.12
 - Mapstruct: 1.31.1
 - H2: 1.4.200
-- Flyway: 6.4.4
 - Spring Doc, Open-API: 1.2.32
 
 **Note: Spring Application (Async)Events are used for start point of event-driven system.** 
@@ -74,14 +74,22 @@ Used Libraries and Frameworks:
 
 ## 4.API Documentation
 
+Please, Test the API from SpringDoc Panel.
+
 You can check REST Document from following URL;
+
 ```
     http://localhost:8080/api/documentation.html
 ```
 
 ## 5.Concerns
 
-1. You cannot retrieve too much record at the same time, 
-even it is not on the spec, basic pagination structure needed.
+1. You cannot retrieve too much record at the same time, even it is not on the spec, basic pagination structure introduced. page: 1, count: 20 default settings.
 
-2. Seems like business case search logic separated into 2 groups: city, phone so that will be implemented.  
+2. Validation rules remained basic level for sake of demo project
+
+3. Unit Tests created specifically for domain services
+
+4. Integration Tests only created for REST level, Persistence layer Integration tests are not implemented.
+
+   

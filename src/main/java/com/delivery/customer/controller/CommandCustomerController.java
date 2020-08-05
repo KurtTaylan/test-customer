@@ -13,7 +13,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 
-@Tag(name = "Customer", description = "All Customer Related")
+@Tag(name = "Customer Commands")
 @RequiredArgsConstructor
 @RequestMapping("/customer")
 @RestController

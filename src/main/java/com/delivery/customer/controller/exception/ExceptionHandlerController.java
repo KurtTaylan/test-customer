@@ -11,6 +11,8 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import java.net.BindException;
+
 
 @Slf4j
 @ControllerAdvice
@@ -23,7 +25,7 @@ public class ExceptionHandlerController {
         Error error = new Error();
         error.setMessage("Validation Problem Occurred");
         error.setDetail(ex.getMessage());
-        return new ResponseEntity<Object>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(BusinessException.class)
@@ -36,10 +38,19 @@ public class ExceptionHandlerController {
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    protected ResponseEntity<Object> handleBusinessException(MethodArgumentNotValidException ex) {
+    protected ResponseEntity<Object> handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
         log.error("MethodArgumentNotValidException exception occurred: ", ex);
         Error error = new Error();
         error.setMessage("MethodArgumentNotValidException Problem Occurred");
+        error.setDetail(ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(BindException.class)
+    protected ResponseEntity<Object> handleBindException(BindException ex) {
+        log.error("BindException exception occurred: ", ex);
+        Error error = new Error();
+        error.setMessage("BindException Problem Occurred");
         error.setDetail(ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
