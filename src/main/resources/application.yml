@@ -1,0 +1,63 @@
+server:
+  port: 8080
+  http2:
+    enabled: true
+  servlet:
+    context-path: /api
+  compression:
+    enabled: true
+    mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
+    min-response-size: 1024
+  shutdown: graceful
+
+management:
+  server:
+    port: 8081
+  endpoints:
+    web:
+      exposure:
+        include: httptrace
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  api-docs:
+    path: /documentation
+    enabled: true
+  swagger-ui:
+    path: /documentation.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+
+spring:
+  application:
+    name: Customer API
+  devtools:
+    add-properties: true
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    open-in-view: false
+    show-sql: false
+    hibernate:
+      ddl-auto: create-drop # Easy Demo Purposes, otherwise should be `validate`
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+    hikari:
+      pool-name: customer-db-pool
+      minimum-idle: 5
+      maximum-pool-size: 30
+      idle-timeout: 30000
+      max-lifetime: 60000
+      validation-timeout: 5000
+      driver-class-name: org.h2.Driver
+  flyway:
+    enabled: true
+    user: sa
+    password: password
+    schemas: customer
+    url: jdbc:h2:mem:testdb
