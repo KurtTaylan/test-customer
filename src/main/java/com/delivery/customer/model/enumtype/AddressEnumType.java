@@ -5,8 +5,8 @@ import lombok.Getter;
 @Getter
 public enum AddressEnumType {
 
-    BUSINESS(1),
-    HOME(2);
+    business(1),
+    home(2);
 
     private final int value;
 

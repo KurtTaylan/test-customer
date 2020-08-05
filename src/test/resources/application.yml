@@ -50,9 +50,3 @@ spring:
       max-lifetime: 60000
       validation-timeout: 5000
       driver-class-name: org.h2.Driver
-  flyway:
-    enabled: true
-    user: sa
-    password: password
-    schemas: customer
-    url: jdbc:h2:mem:testdb

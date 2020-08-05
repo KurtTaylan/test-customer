@@ -2,6 +2,7 @@ package com.delivery.customer.model.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
+@ToString(exclude = "addressSet")
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity(name = "customer")

@@ -7,6 +7,7 @@ import com.delivery.customer.model.exception.ValidationException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -18,7 +19,7 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(ValidationException.class)
     protected ResponseEntity<Object> handleValidationException(ValidationException ex) {
-        log.error("Validation exception occurred: []", ex);
+        log.error("Validation exception occurred: ", ex);
         Error error = new Error();
         error.setMessage("Validation Problem Occurred");
         error.setDetail(ex.getMessage());
@@ -27,16 +28,25 @@ public class ExceptionHandlerController {
 
     @ExceptionHandler(BusinessException.class)
     protected ResponseEntity<Object> handleBusinessException(BusinessException ex) {
-        log.error("Business exception occurred: []", ex);
+        log.error("Business exception occurred: ", ex);
         Error error = new Error();
         error.setMessage("Business Problem Occurred");
         error.setDetail(ex.getMessage());
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
 
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<Object> handleBusinessException(MethodArgumentNotValidException ex) {
+        log.error("MethodArgumentNotValidException exception occurred: ", ex);
+        Error error = new Error();
+        error.setMessage("MethodArgumentNotValidException Problem Occurred");
+        error.setDetail(ex.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(ServerException.class)
     protected ResponseEntity<Object> handleBusinessException(ServerException ex) {
-        log.error("Server exception occurred: []", ex);
+        log.error("Server exception occurred: ", ex);
         Error error = new Error();
         error.setMessage("Server Problem Occurred");
         error.setDetail(ex.getMessage());
